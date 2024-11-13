@@ -11,7 +11,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { BeatLoader } from "react-spinners";
 import Error from "./error";
-import * as Yup from "Yup";
+import * as yup from "Yup";
 import useFetch from "@/hooks/use-fetch";
 import { login } from "@/db/apiAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -46,11 +46,13 @@ const Login = () => {
   const handleLogin = async () => {
     setErrors([]);
     try {
-      const schema = Yup.object().shape({
-        email: Yup.string()
+      const schema = yup.object().shape({
+        email: yup
+          .string()
           .email("Invalid Email")
           .required("Email is Required"),
-        password: Yup.string()
+        password: yup
+          .string()
           .min(6, "Password must be at least 6 characters")
           .required("Password is Req"),
       });
